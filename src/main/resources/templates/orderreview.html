@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Review your order</h1>
+    <br /><br />
+    <table>
+        <thead>
+            <tr>
+                <th>Order Date</th>
+                <th>Customer name</th>
+                <th>Ship Address</th>
+                <th>Notes</th>
+                <th>Tax</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:object="${order}">
+                <td th:text="${order.orderDate}"></td>
+                <td th:text="${order.customerName}"></td>
+                <td th:text="${order.shipAddress}"></td>
+                <td th:text="${order.Notes}"></td>
+                <td th:text="${order.Tax}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <br /><br /><br /><br />
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Unit Price</th>
+                <th>Discount</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="{orddet: ${orderdetails}}">
+                <td th:text="${orddet.product}"></td>
+                <td th:text="${orddet.unitPrice}"></td>
+                <td th:text="${orddet.discount}"></td>
+                <td th:text="${orddet.quantity}"></td>
+
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -95,6 +95,7 @@ public class HomeController {
     public String reviewOrder(HttpSession session, Model model) {
         model.addAttribute("order", (Order) session.getAttribute("order"));
         model.addAttribute("orderdetails", (List<OrderDetails>) session.getAttribute("orderdetails"));
-        return "revieworder";
+        
+        return "orderreview";
     }
 }
