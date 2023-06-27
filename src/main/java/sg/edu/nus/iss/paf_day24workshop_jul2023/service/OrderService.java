@@ -20,11 +20,21 @@ public class OrderService {
     @Autowired
     OrderDetailsRepo ordDetailsRepo;
 
-    // @Transactional
+    @Transactional
     public Boolean makeOrder(Order order, List<OrderDetails> details) {
+
+        // simulate error before performing any operation
+        if (true) {
+            throw new IllegalArgumentException("Exception before performing any operation");
+        }
 
         // 1. create the order and get the returned pk of the created order
         Integer iCreatedOrderID = ordRepo.insertOrder(order);
+
+        // simulate error after creating a new order
+        // if (true) {
+        //     throw new IllegalArgumentException("Exception after creating a new order");
+        // }
 
         // 2. set the fk for the order details that linked to the created order
         for (OrderDetails od: details) {
@@ -34,6 +44,11 @@ public class OrderService {
         // 3. create the order details
         // int [] iAdded = ordDetailsRepo.add(details);
         ordDetailsRepo.add(details);
+
+        // simulate order at the end of transaction after performing 2. & 3.
+        // if (true) {
+        //     throw new IllegalArgumentException("Exception at the end of transaction after performing 2. & 3.");
+        // }
 
         return true;
     }
