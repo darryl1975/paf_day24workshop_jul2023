@@ -3,7 +3,6 @@ package sg.edu.nus.iss.paf_day24workshop_jul2023.exception;
 import java.util.Date;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

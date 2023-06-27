@@ -2,8 +2,6 @@ package sg.edu.nus.iss.paf_day24workshop_jul2023.exception;
 
 import java.util.Date;
 
-import org.springframework.http.HttpStatus;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
