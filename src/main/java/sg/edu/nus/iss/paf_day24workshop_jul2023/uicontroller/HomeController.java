@@ -25,7 +25,7 @@ public class HomeController {
     @Autowired
     OrderService ordSvc;
 
-    @Value("${home.title}")
+    @Value("${home.title}") 
     private String homeTitle;
 
     @GetMapping
