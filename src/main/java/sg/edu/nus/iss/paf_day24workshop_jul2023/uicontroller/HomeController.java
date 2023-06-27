@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.servlet.http.HttpSession;
 import sg.edu.nus.iss.paf_day24workshop_jul2023.model.Order;
 import sg.edu.nus.iss.paf_day24workshop_jul2023.model.OrderDetails;
+import sg.edu.nus.iss.paf_day24workshop_jul2023.service.OrderService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ import org.springframework.ui.Model;
 @Controller
 @RequestMapping("/home")
 public class HomeController {
+
+    @Autowired
+    OrderService ordSvc;
 
     @Value("${home.title}")
     private String homeTitle;
@@ -77,16 +82,16 @@ public class HomeController {
 
     @PostMapping("/completeorder")
     public String completeOrder(HttpSession session, @ModelAttribute("orderdetails") OrderDetails orderDetails) {
-        List<OrderDetails> ordDetailList = null;
-        if (session.getAttribute("orderdetails") == null) {
-            ordDetailList = new ArrayList<OrderDetails>();
-            ordDetailList.add(orderDetails);
-            session.setAttribute("orderdetails", ordDetailList);
-        } else {
-            ordDetailList = (List<OrderDetails>) session.getAttribute("orderdetails");
-            ordDetailList.add(orderDetails);
-            session.setAttribute("orderdetails", ordDetailList);
-        }
+        // List<OrderDetails> ordDetailList = null;
+        // if (session.getAttribute("orderdetails") == null) {
+        //     ordDetailList = new ArrayList<OrderDetails>();
+        //     ordDetailList.add(orderDetails);
+        //     session.setAttribute("orderdetails", ordDetailList);
+        // } else {
+        //     ordDetailList = (List<OrderDetails>) session.getAttribute("orderdetails");
+        //     ordDetailList.add(orderDetails);
+        //     session.setAttribute("orderdetails", ordDetailList);
+        // }
 
         return "redirect:/home/orderreview";
     }
@@ -97,5 +102,16 @@ public class HomeController {
         model.addAttribute("orderdetails", (List<OrderDetails>) session.getAttribute("orderdetails"));
         
         return "orderreview";
+    }
+    @GetMapping("/closeorder")
+    public String closeOrder(HttpSession session) {
+        Order order = (Order) session.getAttribute("order");
+        List<OrderDetails> orderDetails = (List<OrderDetails>) session.getAttribute("orderdetails");
+        ordSvc.makeOrder(order, orderDetails);
+
+        // remove the session objects created for the order and orderdetails
+        session.invalidate();
+
+        return "welcome";
     }
 }

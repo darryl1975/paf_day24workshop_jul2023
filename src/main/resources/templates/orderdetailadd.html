@@ -30,14 +30,16 @@
                 <div class="col">
                     <input type="submit" value="Add More" class="btn btn-primary">
                 </div>
-                <div class="col">
-                    <form th:action="@{/home/completeorder}" method="post" th:object="${orderDetails}">
-                        <input type="submit" value="Complete Order" class="btn btn-primary">
-                    </form>
-                </div>
             </div>
 
         </form>
+
+        <hr>
+        <div class="col">
+            <form th:action="@{/home/completeorder}" method="post">
+                <input type="submit" value="Complete Order" class="btn btn-primary">
+            </form>
+        </div>
     </div>
 </body>
 </html>
