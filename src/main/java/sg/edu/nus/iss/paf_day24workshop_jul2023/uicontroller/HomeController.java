@@ -53,7 +53,7 @@ public class HomeController {
         return "orderdetailadd";
     }
 
-    @PostMapping("nextdetails")
+    @PostMapping("/nextdetails")
     public String postOrderDetails(HttpSession session, @ModelAttribute("orderdetails") OrderDetails orderDetails,
             Model model) {
         System.out.println("HomeController > postOrderDetails > " + session.getAttribute("order"));
@@ -75,4 +75,26 @@ public class HomeController {
         return "orderdetailadd";
     }
 
+    @PostMapping("/completeorder")
+    public String completeOrder(HttpSession session, @ModelAttribute("orderdetails") OrderDetails orderDetails) {
+        List<OrderDetails> ordDetailList = null;
+        if (session.getAttribute("orderdetails") == null) {
+            ordDetailList = new ArrayList<OrderDetails>();
+            ordDetailList.add(orderDetails);
+            session.setAttribute("orderdetails", ordDetailList);
+        } else {
+            ordDetailList = (List<OrderDetails>) session.getAttribute("orderdetails");
+            ordDetailList.add(orderDetails);
+            session.setAttribute("orderdetails", ordDetailList);
+        }
+
+        return "redirect:/home/orderreview";
+    }
+
+    @GetMapping("/orderreview")
+    public String reviewOrder(HttpSession session, Model model) {
+        model.addAttribute("order", (Order) session.getAttribute("order"));
+        model.addAttribute("orderdetails", (List<OrderDetails>) session.getAttribute("orderdetails"));
+        return "revieworder";
+    }
 }
