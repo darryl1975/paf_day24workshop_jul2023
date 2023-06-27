@@ -26,7 +26,17 @@
                 <label for="quantity" class="form-label">Quantity</label>
                 <input type="number" placeholder="Enter quantity..." th:field="*{quantity}">
             </div>
-            <input type="submit" value="Add More" class="btn btn-primary">
+            <div class="row">
+                <div class="col">
+                    <input type="submit" value="Add More" class="btn btn-primary">
+                </div>
+                <div class="col">
+                    <form th:action="@{/home/completeorder}" method="post" th:object="${orderDetails}">
+                        <input type="submit" value="Complete Order" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+
         </form>
     </div>
 </body>
