@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <form th:action="@{/home/completeorder}" method="post" th:object="${orderDetails}">
+        <form th:action="@{/home/nextdetails}" method="post" th:object="${orderDetails}">
 
             <div class="mb-3">
                 <label for="product" class="form-label">Product</label>
@@ -26,7 +26,7 @@
                 <label for="quantity" class="form-label">Quantity</label>
                 <input type="number" placeholder="Enter quantity..." th:field="*{quantity}">
             </div>
-            <input type="submit" value="Complete Order" class="btn btn-primary">
+            <input type="submit" value="Add More" class="btn btn-primary">
         </form>
     </div>
 </body>

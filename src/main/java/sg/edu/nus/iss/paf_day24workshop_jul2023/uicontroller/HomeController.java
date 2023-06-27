@@ -9,6 +9,9 @@ import jakarta.servlet.http.HttpSession;
 import sg.edu.nus.iss.paf_day24workshop_jul2023.model.Order;
 import sg.edu.nus.iss.paf_day24workshop_jul2023.model.OrderDetails;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,5 +52,27 @@ public class HomeController {
 
         return "orderdetailadd";
     }
-    
+
+    @PostMapping("nextdetails")
+    public String postOrderDetails(HttpSession session, @ModelAttribute("orderdetails") OrderDetails orderDetails,
+            Model model) {
+        System.out.println("HomeController > postOrderDetails > " + session.getAttribute("order"));
+        System.out.println("HomeController > postOrderDetails > " + orderDetails);
+
+        List<OrderDetails> ordDetailList = null;
+        if (session.getAttribute("orderdetails") == null) {
+            ordDetailList = new ArrayList<OrderDetails>();
+            ordDetailList.add(orderDetails);
+            session.setAttribute("orderdetails", ordDetailList);
+        } else {
+            ordDetailList = (List<OrderDetails>) session.getAttribute("orderdetails");
+            ordDetailList.add(orderDetails);
+            session.setAttribute("orderdetails", ordDetailList);
+        }
+
+        OrderDetails newOrderDetail = new OrderDetails();
+        model.addAttribute("orderDetails", newOrderDetail);
+        return "orderdetailadd";
+    }
+
 }
