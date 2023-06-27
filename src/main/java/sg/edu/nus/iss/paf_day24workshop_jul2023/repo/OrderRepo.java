@@ -13,6 +13,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import sg.edu.nus.iss.paf_day24workshop_jul2023.exception.ResourceNotFoundException;
 import sg.edu.nus.iss.paf_day24workshop_jul2023.model.Order;
 
 @Repository
@@ -30,7 +31,7 @@ public class OrderRepo {
 
         if (orders.isEmpty()) {
             // throw custom exception
-            throw new IllegalArgumentException("Order not found");
+            throw new ResourceNotFoundException("Order not found");
         }
 
         return orders.get(0);
@@ -41,7 +42,7 @@ public class OrderRepo {
 
         if (orders.isEmpty()) {
             // throw custom exception
-            throw new IllegalArgumentException("Order not found");
+            throw new ResourceNotFoundException("Order not found");
         }
 
         return orders;

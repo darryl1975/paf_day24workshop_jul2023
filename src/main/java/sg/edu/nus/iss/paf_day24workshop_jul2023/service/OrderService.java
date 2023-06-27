@@ -24,9 +24,9 @@ public class OrderService {
     public Boolean makeOrder(Order order, List<OrderDetails> details) {
 
         // simulate error before performing any operation
-        if (true) {
-            throw new IllegalArgumentException("Exception before performing any operation");
-        }
+        // if (true) {
+        //     throw new IllegalArgumentException("Exception before performing any operation");
+        // }
 
         // 1. create the order and get the returned pk of the created order
         Integer iCreatedOrderID = ordRepo.insertOrder(order);
