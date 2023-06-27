@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import sg.edu.nus.iss.paf_day24workshop_jul2023.model.Order;
 import sg.edu.nus.iss.paf_day24workshop_jul2023.model.OrderDetails;
@@ -19,6 +20,7 @@ public class OrderService {
     @Autowired
     OrderDetailsRepo ordDetailsRepo;
 
+    // @Transactional
     public Boolean makeOrder(Order order, List<OrderDetails> details) {
 
         // 1. create the order and get the returned pk of the created order
